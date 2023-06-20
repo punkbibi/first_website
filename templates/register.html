@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+
+{% block title %} Registration {% endblock %}
+
+{% block body %}
+{{super()}}
+
+<form method="post" style="width:50%; margin-left:20px;">
+    <label>Email address</label>
+    <input type="text" name="email" class="form-control mb-3 mt-3" placeholder="Put your email here" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label>Username</label>
+    <input type="text" name="username" class="form-control mb-3 mt-3" placeholder="Put your username here" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label>password </label>
+    <input type="password" name="password" class="form-control mb-3 mt-3" placeholder="password" id="exampleInputPassword1">
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        {% if message.startswith('This')  %}
+            <p style="color: red;">{{ message }}</p>
+        {% else %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endwith %}
+
+
+{% endblock %}
+

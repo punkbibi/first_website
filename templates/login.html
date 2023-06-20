@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock  %} 
+
+{% block body %}
+{{ super() }}
+  <form method="post" style="width:50%; margin-left:20px;">
+    <label>Email/username</label>
+    <input type="text" name="username" class="form-control mb-3 mt-3" placeholder="Put your username/email here" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label>password</label>
+    <input type="password" name="password" class="form-control mb-3 mt-3" placeholder="Password" id="exampleInputPassword1">
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+  <a href="{{url_for('reg')}}">click here if you doesn't have an account</a>
+
+{% with messages = get_flashed_messages() %}  
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.startswith('Your') or message.startswith('This')  %}
+                <p style="color: red;">{{ message }}</p>
+            {% else %}
+                <p style="color: green;">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+{% endblock %}
+
