@@ -1,10 +1,6 @@
-# Low budget facebook
+# Low budget Facebook
 
 This repository contains a Flask-based thought-sharing application. Users can register, log in, and share their thoughts with others. The application also includes a fun section with random jokes.
-
-
-
-3. Open a web browser and access the application at `http://localhost:5000`.
 
 ## Features
 
