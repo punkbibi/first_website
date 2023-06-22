@@ -4,7 +4,7 @@
 
 {% block body %}
     {{ super() }}
-    <h1>Hello {{ session['username'] }}</h1>
+    <h1>Hello {{ session['username'] }}, here can you see what you and other people think about</h1>
     <div class="container">
         <h2>Posts:</h2>
         {% for thought in thoughts %}
