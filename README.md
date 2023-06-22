@@ -27,7 +27,7 @@ This repository contains a Flask-based thought-sharing application. Users can re
 
 ## Database
 
-The application uses SQLite as the database backend. The database file is `Database.db`.
+The application uses Flask SQL-Alchemy as the database backend. The database file is `Database.db`.
 
 ## Templates
 
@@ -45,6 +45,4 @@ The application uses several HTML templates located in the `templates` directory
 
 Contributions to this project are welcome. Feel free to open issues and submit pull requests to suggest improvements or fix any bugs.
 
-## License
 
-This project is licensed under the [MIT License](LICENSE).
