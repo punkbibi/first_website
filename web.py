@@ -38,6 +38,10 @@ def home():
     thoughts = Thoughts.query.all()
     return render_template('home.html', thoughts=thoughts)  
 
+@app.route('/aboutus')
+def about():
+    return render_template('aboutus.html')
+
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
