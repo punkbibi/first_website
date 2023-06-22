@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Home {% endblock %}</title>
-</head>
-<body>
-    {%block body%}
-    {{super()}}
-    <h1> hello {{ session['username'] }}</h1>
-    {% endblock %}
-</body>
-</html>
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    {{ super() }}
+    <h1>Hello {{ session['username'] }}</h1>
+    <div class="container">
+        <h2>Posts:</h2>
+        {% for thought in thoughts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p><strong>Post {{ loop.index }}:</strong> {{ thought.post }}</p>
+                    <p><em>Posted on {{ thought.date.strftime('%Y-%m-%d') }} by {{ thought.user }}</em></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

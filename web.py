@@ -2,34 +2,41 @@ from flask import Flask, redirect, session, url_for, render_template, request, f
 import requests
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime import datetime, date
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'pythonwork'
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///register_log.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///Database.db'
 
-db_register_log = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 
-class User(db_register_log.Model):
-    id = db_register_log.Column(db_register_log.Integer, primary_key=True, autoincrement=True)
-    email = db_register_log.Column(db_register_log.String(80), unique=True, nullable=False)
-    username = db_register_log.Column(db_register_log.String(80), unique=True, nullable=False)
-    password = db_register_log.Column(db_register_log.String(80), nullable=False)
-    
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(80), nullable=False)
+
+
+class Thoughts(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date = db.Column(db.Date, default=date.today)
+    post = db.Column(db.String(1000))
+    user = db.Column(db.String(1000))
 
 
     
     
 with app.app_context():
-    db_register_log.create_all()
+    db.create_all()
     
 
 
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    thoughts = Thoughts.query.all()
+    return render_template('home.html', thoughts=thoughts)  
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
@@ -56,12 +63,16 @@ def login():
 @app.route('/user', methods=['GET', 'POST'])
 def user():
     if request.method == "POST":
-        if  len(request.form['lezgo']) != 0:
+        if len(request.form['lezgo']) != 0:
             text = request.form['lezgo']
-        # !!! male daamate aq table vax 
-            return render_template('user.html')
+            new_thoughts = Thoughts()
+            new_thoughts.post = text
+            new_thoughts.user = session['username']
+            db.session.add(new_thoughts)
+            db.session.commit()
 
-    return render_template('user.html')
+    thoughts = Thoughts.query.filter_by(user=session['username']).all()
+    return render_template('user.html', thoughts=thoughts)
 
     
     
@@ -105,8 +116,8 @@ def reg():
             user.email = request.form['email']
             user.username = request.form['username']
             user.password = generate_password_hash(request.form['password'])
-            db_register_log.session.add(user)
-            db_register_log.session.commit()
+            db.session.add(user)
+            db.session.commit()
 
             flash('User registered successfully', 'success')
             return  redirect(url_for('user'))
