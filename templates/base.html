@@ -19,11 +19,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="{{url_for('user')}}">User</a>
               {% if 'username' not in session %}
               <a class="nav-link" href="{{url_for('login')}}">Log in</a>
               {% endif %}
               {% if 'username' in session %}
+              <a class="nav-link active" aria-current="page" href="{{url_for('user')}}">User</a>
               <a class="nav-link" href="{{url_for('logout')}}">Log Out</a>
               {% endif %}
               <a class="nav-link" href="{{url_for('fun')}}">fun</a>

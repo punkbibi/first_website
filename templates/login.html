@@ -10,7 +10,7 @@
     <input type="password" name="password" class="form-control mb-3 mt-3" placeholder="Password" id="exampleInputPassword1">
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
   </form>
-  <a href="{{url_for('reg')}}">click here if you doesn't have an account</a>
+  <a href="{{url_for('reg')}}">click here if you don't have an account</a>
 
 {% with messages = get_flashed_messages() %}  
     {% if messages %}

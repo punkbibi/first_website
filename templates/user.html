@@ -3,5 +3,14 @@
 
 {% block body %}
 {{super()}}
-<h1> mama {{session['username']}}</h1>
+<h1> Hello {{session['username']}}</h1>
+<form method='post'  class="mb-3 text-center col-6 mx-auto">
+    <label for="exampleFormControlTextarea1">Put your idea here</label>
+    <textarea name="lezgo" placeholder=' what are you thinking ' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <button type="submit" class="btn btn-primary btn-sm">Post</button>
+</form>
+  
+  
+  
+  
 {% endblock %}
