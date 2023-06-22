@@ -2,7 +2,7 @@ from flask import Flask, redirect, session, url_for, render_template, request, f
 import requests
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, date
+from datetime import date
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'pythonwork'
