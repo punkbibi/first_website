@@ -50,8 +50,8 @@ def login():
         user = User.query.filter((User.username == username) | (User.email == username)).first()
         if user and check_password_hash(user.password, password):
             session['username'] = username
-            flash('You are logged in', 'success')
-            return  redirect(url_for('user'))
+            
+            return  redirect(url_for('succesfull_log_in'))
             
             
             
@@ -78,7 +78,10 @@ def user():
     thoughts = Thoughts.query.filter_by(user=session['username']).all()
     return render_template('user.html', thoughts=thoughts)
 
-    
+@app.route('/succesfull_log_in')
+def succesfull_log_in():
+    message = "You are logged in!"
+    return render_template('success.html', message=message) 
     
 
 @app.route('/logout')
@@ -123,10 +126,14 @@ def reg():
             db.session.add(user)
             db.session.commit()
 
-            flash('User registered successfully', 'success')
-            return  redirect(url_for('user'))
+            return  redirect(url_for('succesfull_registretion'))
     
     return render_template('register.html')
+
+@app.route('/succesfull_registretion')
+def succesfull_registretion():
+    message = "User registered successfully"
+    return render_template('success.html', message=message) 
 
 
 if __name__ == '__main__':

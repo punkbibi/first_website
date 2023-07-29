@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Success Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .success-text {
+            font-size: 48px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-text">{{ message }}</div>
+    
+    <script>
+        // Redirect to the user page after 2 seconds
+        setTimeout(function() {
+            window.location.href = '/user';
+        }, 2000);
+    </script>
+</body>
+
+</html>
