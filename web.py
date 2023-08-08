@@ -87,7 +87,7 @@ def succesfull_log_in():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return 'you are logged out'
+    return redirect(url_for('home'))
 
 @app.route('/fun', methods=['POST', 'GET'])
 def fun():
