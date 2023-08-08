@@ -91,7 +91,7 @@ def logout():
 
 @app.route('/fun', methods=['POST', 'GET'])
 def fun():
-    if request.method == 'POST' and 'get_joke' in request.form:
+    if request.method == 'POST':  # and 'get_joke' in request.form
         url = "https://api.chucknorris.io/jokes/random"
         response = requests.get(url)
         result = response.json()
